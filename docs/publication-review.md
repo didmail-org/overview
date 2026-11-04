@@ -1,6 +1,6 @@
 # Publication review
 
-Review date: 2026-11-04. Decisions are repository-specific. Protocol and overview are public; GitHub private vulnerability reporting was enabled and verified for both. At the owner’s request, the former Server repository was renamed to private `server-archive`, and a new private `server` repository was initialized from the same tested source tree. The new repository has a distinct GitHub identity; 12 known prior Server commit hashes were checked and none were accessible through the new repository API. Final new-repository CI is pending. Distribution of built Worker or Blocklet artifacts remains separately gated by third-party notice review. Other component repositories and the historical monorepo remain private.
+Review date: 2026-11-04. Decisions are repository-specific. Protocol and overview are public; GitHub private vulnerability reporting was enabled and verified for both. A new private `server` repository was initialized from the tested source tree with a distinct GitHub identity; 12 known prior Server commit hashes were not accessible through the new repository API. At the owner's request, the former Server repository and the local Git bundles created for its history were deleted. Final new-repository CI is pending. Distribution of built Worker or Blocklet artifacts remains separately gated by third-party notice review. Other component repositories and the historical monorepo remain private.
 
 ## Completed checks
 
@@ -22,7 +22,7 @@ Review date: 2026-11-04. Decisions are repository-specific. Protocol and overvie
 6. Complete remaining target-platform builds and any required hosted ARC/Workers integration acceptance. Unit tests and a local build do not establish production readiness.
 7. Repeat link, history and binary scans after the final commits and check that published repositories and package dependencies are accessible in the intended visibility order.
 
-After a history replacement, GitHub still returned an old Server commit by hash. The owner therefore selected a new independent repository: the original is preserved privately as `server-archive`, the new `server` started with an identical-tree initial commit, and local Git bundles preserve the prior histories. Twelve known old commit hashes were not accessible through the new repository API while private. Old objects may remain accessible through the separate private archive; this does not prove their deletion from GitHub. The original DIDMail monorepo has separate history and disclosure concerns and remains private pending its own review.
+After a history replacement, GitHub still returned an old Server commit by hash. The owner therefore selected a new independent repository, and the new `server` started with an identical-tree initial commit. Twelve known old commit hashes were not accessible through the new repository API while private. The former repository and the local history bundles were subsequently deleted at the owner's request; this does not establish when GitHub removes retained data. The original DIDMail monorepo has separate history and disclosure concerns and remains private pending its own review.
 
 ## License inventory evidence and limits
 
