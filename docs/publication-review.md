@@ -1,6 +1,6 @@
 # Publication review
 
-Review date: 2026-11-04. Decisions are repository-specific. The protocol repository was made public at commit `20c21de` after the checks described below; GitHub private vulnerability reporting was enabled and verified at cutover, and an anonymous Git read was verified. Server is undergoing final validation; overview and the remaining component repositories remain private pending their respective checks. The historical monorepo remains private and is not included in this decision.
+Review date: 2026-11-04. Decisions are repository-specific. The protocol repository was made public at commit `20c21de` after the checks described below; GitHub private vulnerability reporting was enabled and verified at cutover, and an anonymous Git read was verified. Server is undergoing final validation. The overview source contains project documentation only and is a public-source candidate, subject to its owner choosing to publish it and enabling private vulnerability reporting. Other component repositories remain private pending their respective checks. The historical monorepo remains private and is not included in this decision.
 
 ## Completed checks
 
@@ -22,7 +22,7 @@ Review date: 2026-11-04. Decisions are repository-specific. The protocol reposit
 6. Complete remaining target-platform builds and any required hosted ARC/Workers integration acceptance. Unit tests and a local build do not establish production readiness.
 7. Repeat link, history and binary scans after the final commits and check that published repositories and package dependencies are accessible in the intended visibility order.
 
-The owner authorized replacement of the new Server repository history with an identical-tree single-commit candidate; its former complete history was saved in a private local Git bundle. The preserved historical monorepo has separate history, pull-request metadata and disclosure concerns; none of those are resolved by publishing new repositories. Its visibility must remain private pending its own review.
+The owner authorized and the maintainers performed replacement of the new Server repository history with an identical-tree single-commit candidate; its former complete history was saved in a private local Git bundle. The candidate was tested before replacement. Subsequent public-readiness changes pin the now-public protocol revision and add explicit standalone Worker tests and CI while retaining the full cross-client suite. The preserved historical monorepo has separate history, pull-request metadata and disclosure concerns; none of those are resolved by publishing new repositories. Its visibility must remain private pending its own review.
 
 ## License inventory evidence and limits
 
@@ -39,4 +39,4 @@ These revisions record the audited component heads; a later commit requires rech
 - [extension `d8c018b`](https://github.com/didmail-org/extension/commit/d8c018be67ca5fa5b71fc8dcab7e3bfd611c8528)
 - [mobile `79fc8be`](https://github.com/didmail-org/mobile/commit/79fc8beb8ca5aceb7c8f2068c4854ac4684036d7)
 - [desktop `1ff7712`](https://github.com/didmail-org/desktop/commit/1ff7712c331dbabb4d2ae01b327e29436fa42656)
-- [server `f47ce13`](https://github.com/didmail-org/server/commit/f47ce132654340cbd9744011329ce998153b6e60)
+- [server `364fa1d`](https://github.com/didmail-org/server/commit/364fa1d312c51a3d5f11f74e2274af8f488de03b)
