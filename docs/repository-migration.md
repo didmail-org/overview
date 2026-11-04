@@ -1,6 +1,6 @@
 # Repository migration
 
-The previous private `didmail-org/didmail` monorepo is preserved as a historical reference. Current development uses the separate repositories listed in the [project overview](../README.md). Their histories start with the migrated snapshots; the old repository has not been made public or rewritten.
+The previous private `didmail-org/didmail` monorepo was the source of the migration. Current development uses the separate repositories listed in the [project overview](../README.md). Their histories start with the migrated snapshots; historical local material is retained separately.
 
 | Previous monorepo path | Current repository |
 | --- | --- |
