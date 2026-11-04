@@ -1,0 +1,18 @@
+{
+  "name": "@didmail/overview-checks",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.11.2",
+  "engines": {
+    "node": ">=24.14.0"
+  },
+  "scripts": {
+    "check:docs": "node scripts/check-docs.mjs",
+    "test": "node --test scripts/check-docs.test.mjs"
+  },
+  "devDependencies": {
+    "github-slugger": "2.0.0",
+    "markdown-it": "15.0.3",
+    "parse5": "8.1.0"
+  }
+}
