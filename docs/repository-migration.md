@@ -10,4 +10,11 @@ The previous private `didmail-org/didmail` monorepo was the source of the migrat
 | `apps/mobile` | [mobile](https://github.com/didmail-org/mobile) |
 | `apps/flutter` | [desktop](https://github.com/didmail-org/desktop) |
 
-The mobile SDK remains a complete, integrity-checked snapshot. Historical checkouts, including the legacy server, are retained in verified local archives under the historical `didmail` checkout. Consult the local workspace `AGENTS.md` for archive locations and recovery instructions; the former sibling checkout directories have been removed. For current setup see [development](development.md); for publication readiness see the [publication review](publication-review.md).
+The mobile protocol is still an immutable complete snapshot, not a second SDK
+authority. Active repositories have independent histories and lockfiles. Do not
+recreate a monorepo for normal development or copy package dependencies together.
+Historical local recovery sources are private; the workspace guide records their
+ownership. This old-path table is not current runtime or restore instructions.
+
+Use [development](development.md) for setup and
+[release review](publication-review.md) before changing visibility/distribution.

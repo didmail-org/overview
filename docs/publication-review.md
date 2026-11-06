@@ -1,64 +1,73 @@
-# Publication review
+# Publication and distribution review
 
-Review date: 2026-11-04. Decisions are repository-specific. Protocol, overview and Server source are public; GitHub private vulnerability reporting was enabled and verified for all three. A new `server` repository was initialized from the tested source tree with a distinct GitHub identity; 12 known prior Server commit hashes were not accessible through the new repository API. At the owner's request, the former Server repository and the local Git bundles created for its history were deleted. New-repository CI passed at `46b8fcccce0f75152353c8b655ac9e12963787b8`; secret scanning and push protection were enabled. Worker and Blocklet distribution remain blocked after the artifact audit below; public source visibility does not authorize compiled third-party distribution. Other component repositories remain private.
+For release maintainers changing repository visibility or delivering an artifact.
+Source visibility, dependency provenance and runtime acceptance are separate
+decisions. The [status table](status.md) owns product capability summaries.
 
-## Completed checks
+## Current scope and authorities
 
-- The six repositories retain Apache-2.0 LICENSE and NOTICE files. The owner confirmed rights to the server promotional images, application icons, dove and brand graphics, encryption illustration, and Server envelope and namecard SVG artwork; see [Licensing](licensing.md).
-- Gitleaks scanned all reachable history of each new repository. Its generic-key findings occur in test vectors, examples, public configuration and lockfiles; scanner output alone does not prove fixture identities have no assets or establish that unknown credentials are absent. The local E2E wallet mnemonic was compared byte-for-byte with reachable Git objects in all six repositories; no exact match was found. The owner's former author email and local home path were also searched across all reachable Git objects, with no exact matches. New commits use a GitHub noreply address. Tracked-file inventory found the mobile Android debug keystore, which matched the installed React Native example byte-for-byte, and extension development/production environment files containing public configuration and build flags. No other tracked paths matched the checked local-environment, key or database filename patterns; filename checks cannot rule out differently named private data.
-- Dependabot alerts were enabled on the six repositories. GitHub secret scanning and push protection were enabled for the public protocol and overview repositories; their current open secret-scanning alert counts were zero at review time. Extension, mobile and server each report a low-severity deepmerge advisory. Their audit scripts verify the local patches; the upstream alerts remain open.
-- The desktop Flutter tests passed 1,448 tests with 11 skips. A separate local run with a previously built release SQLCipher framework from the original workspace, whose Dart and macOS Pod lockfiles match the standalone checkout, passed 1,458 tests with one skip. Standalone macOS CI for desktop commit `019358a` passed, including the unsigned release build, full SQLCipher test suite and native backup/restore fault-recovery integration; the later documentation update at `1ff7712` also passed CI. Distribution signing remains unverified. Mobile passed 127 Jest suites and 1,315 tests; its bundled protocol passed 202 tests and integrity verification. Mobile CI at commit `dcdae89` completed successfully, including the configured native Realm and Android checks; the later complete protocol snapshot/documentation update at `55e98e4` also passed CI. Protocol passed 202 tests, its current CI passed, production dependency audit reported no advisories, and six available CI logs had no scanner findings. The HPKE fixture was traced to a byte-identical earlier Cisco go-hpke source blob, with its BSD-2-Clause license preserved in the protocol notices. Extension passed 402 tests and its build, type and lint checks.
-- Extension packaging no longer deletes or overwrites `.env.local`; it refuses packaging if the file or a dangling symlink exists. The tested Chrome ZIP contains the project LICENSE, NOTICE and notices/license texts for patched dependencies, and no `.env` file. The Chrome ZIP's two scanner findings matched the configured public token address. Server now copies 17 curated legal files into its Worker offline output, Worker ASSETS and final ARC package, with byte comparisons and full ARC manifest verification. Verified upstream texts and separate UI notices have been added; the remaining artifact-specific blockers are listed below.
-- Shared engineering documents were moved to `overview`; links among the six working repositories were checked. The mobile protocol snapshot was re-imported as a complete unit from protocol commit `ba723e5`, then integrity-checked and tested.
-- Server passed lint/build, 42 Jest suites / 362 tests, script tests (147 passed, 3 skipped), UI tests (49 passed), native-page/browser artifact checks and the standalone Worker suite (140 passed, 1 skipped; cross-client codec test excluded). Its final Wrangler dry run introduced no additional npm module. These checks do not establish hosted ARC acceptance, license approval or remote deployment readiness; the standard standalone assets still lack their referenced genuine ARC core CSS.
+Protocol, overview, Server, the project website and organization profile are
+public. Client repositories remain private while their publication reviews
+continue. Verify actual access/visibility before a release; an accessible source
+repository does not authorize distribution of compiled third-party content.
 
-## Remaining gates
-
-1. Review scanner matches and fixture provenance for each final repository revision. Public synthetic test keys must never be funded or used with real user data. Scanning cannot establish the state of every account on every chain; repeat history and binary scans before each visibility change.
-2. Complete dependency and remaining asset provenance review, including iOS Pods/Gems, Flutter SDK dependencies, any fonts and native binaries such as LGPL libvips; the owner-confirmed artwork is recorded in the licensing guide. Confirm complete third-party license texts, notices, source/offer obligations and distribution archives. Existing dependency inventories and the owner's asset confirmation are useful evidence, not a complete legal review.
-3. Review the latest mobile CI run and current dependency advisory results after the iOS lockfile update. In isolation, CocoaPods 1.16.2 and xcodeproj 1.27.0 resolved the toolchain mismatch. A fresh `pod install` and a separate fresh `pod install --deployment` succeeded using verified cached Hermes archives, and an unsigned iOS simulator Debug build succeeded. The Pod lockfile changed only 68 Podspec checksums, not dependency sections. The four updated Gems matched RubyGems SHA-256 metadata; GitHub's advisory query returned no affected advisories for those exact versions at review time. These checks do not establish signed distribution or physical-device acceptance.
-4. Establish and verify a private security reporting channel. The owner selected GitHub private vulnerability reporting for publication. It has been enabled and verified for the public protocol and overview repositories. Enable and verify it as part of each remaining visibility change; it is not currently an available reporting channel on those private repositories. Do not publish until the cutover procedure is ready.
-5. Server's new-repository CI passed before public cutover. The public protocol dependency is accessible anonymously; a frozen offline Server installation was verified. The standalone Worker suite explicitly excludes the cross-client codec test; the cross-client test passed locally with sibling client checkouts. Extension and other unpublished components still need their own final CI and distribution review.
-6. Complete remaining target-platform builds and any required hosted ARC/Workers integration acceptance. Unit tests and a local build do not establish production readiness.
-7. Repeat link, history and binary scans after the final commits and check that published repositories and package dependencies are accessible in the intended visibility order.
-
-After a history replacement, GitHub still returned an old Server commit by hash. The owner therefore selected a new independent repository, and the new `server` started with an identical-tree initial commit. Twelve known old commit hashes were not accessible through the new repository API while private. The former repository and the local history bundles were subsequently deleted at the owner's request; this does not establish when GitHub removes retained data. The original DIDMail monorepo has separate history and disclosure concerns; its historical local material is retained separately.
-
-## License inventory evidence and limits
-
-The installed-package inventory found missing license metadata for `@arcblock/did-motif@1.1.14`, `configurable@0.0.1`, `escape-regexp@0.0.1`, and `@realm/fetch@0.1.1`. The installed `did-motif` package has an Apache-2.0 license file; `configurable` and `escape-regexp` state MIT in their READMEs; Realm JS source at the matching tag states Apache-2.0 as described in [Licensing](licensing.md). These observations do not establish complete notice compliance for a built archive. The standalone tracked-file inventory found no `.ttf`, `.otf`, `.woff` or `.woff2` files; dependencies or built artifacts may still include fonts. The prior inventory found license files for all 174 hosted Flutter lock entries and license declarations for 88 locally installed Podspecs, not a review of every native dependency or platform.
-
-One locally tested Chrome ZIP contained no native `.node`, `.so`, `.dylib`, or `.dll` file. That narrows, but does not resolve, the distribution analysis of LGPL libvips and its dependencies in other builds and targets. The Chrome ZIP includes the project LICENSE, NOTICE, patch-specific notices, Embla license, and an audit collection of 264 license/notice files from installed compiler-input packages, together with its linked inventory. The collection is intentionally marked incomplete and has been verified byte-for-byte in a locally generated archive; it is not yet a verified complete third-party notice bundle. Do not distribute it as a finished release on this evidence alone.
-
-An instrumented extension production webpack build enumerated 2,580 client compiler module paths mapping to 271 package instances; see the [sanitized dependency inventory](https://github.com/didmail-org/extension/blob/main/docs/browser-dependency-inventory.md). This compiler inventory can include modules later removed by optimization and is not a complete cross-platform SBOM. Two instances lacked license metadata (`@arcblock/did-motif@1.1.14` and `jsonpack@1.1.5`); both include license text in the installed package. Nine instances had no local LICENSE/COPYING file; their metadata, source provenance and distribution obligations require review. The upstream tagged MIT license for the three Embla 8.6.0 packages has been added to the extension notice set. The six other instances lacking a local license file are `@ocap/util@1.30.24`, `@ocap/proto@1.30.24`, `@arcblock/ws@1.30.24`, `html-parse-stringify@3.0.1`, `interface@1.2.1`, and `react-remove-scroll-bar@2.3.8`; their manifests declare Apache-2.0 or MIT. Exact source and required copyright/notice text remain to be verified, and the ArcBlock repository URL named by the packages returned 404 with the current GitHub access. The project owner confirmed that no local or accessible source checkout is currently available for those ArcBlock packages. The remaining third-party archive notice inventory is incomplete.
-
-## Component revisions at this review
-
-These revisions record the audited component heads; a later commit requires rechecking the affected evidence. The overview report itself changes independently.
-- [protocol `20c21de`](https://github.com/didmail-org/protocol/commit/20c21de1fe89397bf4be35435d7a8a3bbc0ee59a)
-- [extension `d8c018b`](https://github.com/didmail-org/extension/commit/d8c018be67ca5fa5b71fc8dcab7e3bfd611c8528)
-- [mobile `79fc8be`](https://github.com/didmail-org/mobile/commit/79fc8beb8ca5aceb7c8f2068c4854ac4684036d7)
-- [desktop `1ff7712`](https://github.com/didmail-org/desktop/commit/1ff7712c331dbabb4d2ae01b327e29436fa42656)
-- [server `964e0dc`](https://github.com/didmail-org/server/commit/964e0dc2a7d31230ca1fcd3b64bbfd8c750ae859)
-
-## Server Worker and Blocklet artifact audit
-
-The [Server distribution audit](https://github.com/didmail-org/server/blob/main/docs/distribution-license-audit.md) records exact sources, investigations, obligations and required owner assistance. [Input/notice hashes](https://github.com/didmail-org/server/blob/main/docs/distribution-dependency-evidence.json), [official npm provenance](https://github.com/didmail-org/server/blob/main/docs/license-source-evidence.json) and [final artifact hashes/checks](https://github.com/didmail-org/server/blob/main/docs/distribution-artifact-evidence.json) make the evidence reviewable without disclosing local paths or private runtime files.
-
-| Scope | Current conclusion |
+| Scope | Release authority |
 | --- | --- |
-| Public Server source | May remain public within the recorded audit scope; original Apache-2.0 and third-party notices are retained. |
-| Worker and its static assets | **Do not distribute yet.** Two package license/provenance gaps, ARC-generated runtime provenance and missing standalone core CSS remain. |
-| Blocklet (`blocklet/dist`) | **Do not distribute yet.** Its two npm UI dependencies now have verified notice coverage, but generated ARC runtime/template output has no verified redistribution basis. Worker-only package gaps are not Blocklet code dependencies. |
+| Original source | LICENSE/NOTICE and [licensing](licensing.md), plus a revision-specific history/secret review |
+| Server native Blocklet | [Native artifact audit](https://github.com/didmail-org/server/blob/main/docs/distribution-license-audit.md), dependency/source hashes and per-build manifest checks |
+| Extension packages | [Browser dependency evidence](https://github.com/didmail-org/extension/blob/main/docs/browser-extensions.md#dependency-provenance), original notices and final browser archive review |
+| Native clients | Component lockfiles, native dependency/license evidence, signing, platform and backup/restore acceptance |
+| Hosted installation | Actual host/provider/storage/session contract and target-specific acceptance; no retired Workers deployment path |
 
-The fresh production Worker has 1,260 esbuild inputs, of which **1,102 contribute bytes / 151 installed package instances**. The five UI entry builds have **64 distinct positive-byte inputs / two npm instances**. The final Wrangler compilation consumes only the already audited Worker entry; the Blocklet contains providers, component source and generated cache assets, without the business Worker, native SQLite or an ARC executable. The new audit command checks current source snapshots, delivered legal bytes and every final ARC manifest entry in CI. Test metafiles no longer overwrite production evidence.
+Server distribution remains blocked by missing texts for `@ocap/proto@1.30.24`,
+`@ocap/util@1.30.24`, `interface@1.2.1` and `utf8@3.0.0`, plus generated-output
+provenance/terms. The Server audit is authoritative for current exact inventory;
+this page does not repeat an obsolete Worker/UI compiler snapshot. Checks passing
+do not change those decisions.
 
-Three of the five previously missing documentary texts were resolved: `boolbase@1.0.0` and `express-async-errors@3.1.1` have preserved ISC licenses from upstream license-adding commits whose runtime files match the npm releases byte-for-byte; `jsonify@0.0.1` preserves its official README public-domain declaration. The existing `cookie-signature@1.0.6` original MIT section and historical Cisco HPKE BSD-2-Clause text were checked and retained in the final legal trees. The historical vectors themselves are absent from these builds.
+## Before a source visibility change
 
-Additional findings were fixed: the Blocklet/UI now carries TanStack MIT and the version-matched QR Code MIT text, copyright and trademark header. The Worker collection now includes the Apache-licensed Closure code embedded in the otherwise BSD-declared `google-protobuf`, alongside the protocol SDK's existing nested MIT notices. The official `@arcblock/validator@1.19.15` package also has MIT metadata but an Apache-2.0 LICENSE; the original Apache notice and full distribution terms are retained and the discrepancy is recorded. Available Worker texts increased from the prior 147-file snapshot to 153 collected texts; that count still does not imply complete distribution compliance. Nine investigated tarballs passed registry integrity checks.
+1. Scan the intended complete history and final tree for credentials, real mail,
+   local databases and private installation state. Review matches, synthetic test
+   identities and native binaries separately; filename filters/scanner totals do
+   not prove absence. Never fund public fixture identities.
+2. Preserve license notices, source metadata, vector provenance and owners'
+   recorded original-artwork permissions. The [licensing record](licensing.md)
+   does not clear third-party assets. Mobile snapshot imports retain the complete
+   SDK LICENSE/NOTICE/THIRD_PARTY_NOTICES and integrity manifest.
+3. Review dependency advisories and native assets for the exact revision. Keep raw
+   audit findings separate from locally verified patches. Existing component
+   deepmerge gates verify source/patch/regression evidence; the advisory version
+   remains reported upstream.
+4. Verify the intended private vulnerability reporting channel before publication.
+   Do not assume a private repository already exposes the public reporting flow.
+5. Verify anonymous access to public Git dependencies and the intended order of
+   publication. Run the owning component's CI and distribution checks with the
+   documented toolchain and intended artifact, rather than importing old totals.
 
-`@ocap/util@1.30.24` and `interface@1.2.1` **remain Worker blockers**. Official npm tarballs, release gitHeads, upstream source/license history and official library documentation were investigated. The ArcBlock repository still returns 404 with available access; the interface release/current source contains no full grant. The owner needs release-specific authoritative license/NOTICE and embedded-code provenance from ArcBlock, plus an applicable interface grant, or separately reviewed alternatives. No license was guessed from SPDX metadata. `@ocap/proto@1.30.24` and `@arcblock/ws@1.30.24` have the same unresolved official-source gap but do **not** contribute to either current target; the Worker uses the licensed 1.19.15 proto and a first-party WS adapter.
+Credential removal is not rotation or history cleanup. Git history replacement,
+repository deletion or an inaccessible old commit does not establish immediate
+removal of retained upstream objects. Preserve private recovery evidence; never
+reconstruct it in a public checkout for a release report.
 
-ARC `2.0.0-beta.74` also emits a common widget/runtime script outside the npm/compiler inventory. Its exact asset hash is recorded; the official installed CLI distribution and reviewed public documentation did not establish the output's redistribution grant or complete notices. Both targets need authoritative vendor evidence for that generated code. Standalone Worker assets additionally reference genuine ARC core CSS that is not included by the normal build; packaging a future offline stylesheet requires its own source/license verification. Externally linked fonts and host-served ARC resources are not included font/native binaries, and any future self-hosted copies need renewed review.
+## Before distributing an artifact
 
-GitHub still reports one open low-severity deepmerge advisory for Server. The local patch gate and attack regressions pass; deepmerge is absent from these Worker/UI compiler inputs. The upstream alert remains open, and the preserved MIT notice is a separate distribution matter. No artifact was deployed, no historical repository/backup was reconstructed, and no original-workspace changes were overwritten.
+Inspect what actually ships: dependency instances, copied/generated source,
+crypto/nested code, fonts/icons, native binaries and complete notice texts.
+An SPDX field or neighboring release's license is not an exact grant. Retain
+source/offer obligations where applicable. No new notice text should be invented
+from a generic template.
+
+The extension's historical browser inventory records compiler inputs, not a
+complete cross-platform SBOM; optimization can remove modules and native targets
+can include different content. Native libvips/LGPL and other platform obligations
+require their own review. Missing ArcBlock/interface and other exact upstream
+texts remain unresolved where present in that artifact. Mobile's `@realm/fetch`
+source/license relationship is recorded in [licensing](licensing.md).
+
+Rebuild the final package, verify notices/hashes and archive exclusions, then
+review signing/store/platform requirements. Unit tests, unsigned builds and local
+ARC execution do not establish distribution or remote deployment acceptance.
+Store exact run logs and scanner evidence in protected artifacts/CI, not appended
+paragraphs here. Previous revision-specific test counts and investigations remain
+in Git history; they are not blanket permission for later source or artifacts.
