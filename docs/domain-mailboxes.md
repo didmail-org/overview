@@ -6,7 +6,7 @@ A domain alias such as `alice@example.org` resolves to a mailbox DID; it is not 
 
 ## Existing implementation
 
-The relevant sources are [domain routes](https://github.com/didmail-org/server/tree/main/api/src/routes) and [AFS compatibility models](https://github.com/didmail-org/server/blob/main/blocklet/providers/didmail-http/source/storage/database.ts). Domain bindings and pricing use local relational data; the node's original wallet is needed to recover encrypted domain keys. Alias ownership uses the configured factory and existing signing/payment rules. Preserve those encodings and keys when migrating storage.
+The relevant sources are [domain routes](https://github.com/didmail-org/server/tree/main/blocklet/providers/didmail-http/source/api/src/routes) and [AFS compatibility models](https://github.com/didmail-org/server/blob/main/blocklet/providers/didmail-http/source/storage/database.ts). Domain bindings and pricing use local relational data; the node's original wallet is needed to recover encrypted domain keys. Alias ownership uses the configured factory and existing signing/payment rules. Preserve those encodings and keys when migrating storage.
 
 ## Deferred work
 
